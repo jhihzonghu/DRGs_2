@@ -27,7 +27,7 @@ public class StaticMaper extends Mapper<Object, Text, Text, Text> {
 			KeyIndex = AfterSplit[8] + "-" + AfterSplit[9].replace("/", "")
 					+ AfterSplit[10].replace("/", "");
 			ifSameKeyIndex(KeyIndex, AfterSplit);
-			if ( AfterSplit[11].equals("10") ) {
+			if ( AfterSplit[11].equals("24") ) {
 
 					int account = Math.abs(Integer.valueOf(AfterSplit[17])) + Math.abs(Integer.valueOf(AfterSplit[27])); 
 					// KeyIndex ;
