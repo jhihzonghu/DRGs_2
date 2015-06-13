@@ -13,7 +13,7 @@ public class StaticMaper extends Mapper<Object, Text, Text, Text> {
 	private int TOTALCOLUM = 29;
 	private String[] AfterSplit;
 	private String KeyIndex, part2, FeeColum;
-
+	
 	@Override
 	protected void map(Object key, Text value, Context context)
 			throws IOException, InterruptedException {
@@ -23,26 +23,27 @@ public class StaticMaper extends Mapper<Object, Text, Text, Text> {
 
 		if ((AfterSplit.length == 29) && !AfterSplit[8].equals("")
 				&& (!AfterSplit[11].equals("")) && (!AfterSplit[12].equals(""))) {
-			System.out.println(AfterSplit[12]);
+			//System.out.println(AfterSplit[12]);
 			KeyIndex = AfterSplit[8] + "-" + AfterSplit[9].replace("/", "")
 					+ AfterSplit[10].replace("/", "");
 			ifSameKeyIndex(KeyIndex, AfterSplit);
-			if (AfterSplit[11].equals("10") || AfterSplit[11].equals("12") || AfterSplit[11].equals("24")||AfterSplit[11].equals("9")) {
+			if ( AfterSplit[11].equals("10") ) {
 
-				if (IfHasSpecilalICDNo(AfterSplit)) {
+					int account = Math.abs(Integer.valueOf(AfterSplit[17])) + Math.abs(Integer.valueOf(AfterSplit[27])); 
 					// KeyIndex ;
-				
-					part2 = "\t" + AfterSplit[11] + "\t" + AfterSplit[12];
-					FeeColum = "" + AfterSplit[17] + "\t" + AfterSplit[27];
-					context.write(new Text(KeyIndex+part2), new Text(AfterSplit[27]+"\t"+1));
+					System.out.println(KeyIndex);
+					part2 = AfterSplit[11] + "\t" + AfterSplit[12];
+					FeeColum = "" + Math.abs(Integer.valueOf(AfterSplit[17])) + "\t" + Math.abs(Integer.valueOf(AfterSplit[27]))+"\t"+account;
+					context.write(new Text(KeyIndex+"\t"+part2+"\t"+FeeColum), new Text("1"));
 					init();
-				}else
-				{
-					part2 = "\t" + AfterSplit[11] + "\t" + AfterSplit[12];
-					FeeColum = "" + AfterSplit[17] + "\t" + AfterSplit[27];
-					context.write(new Text(KeyIndex+part2), new Text(""+1));
-					init();
-				}
+			
+//				else
+//				{
+//					part2 = "\t" + AfterSplit[11] + "\t" + AfterSplit[12];
+//					FeeColum = "" + Math.abs(Integer.valueOf(AfterSplit[17])) + "\t" + Math.abs(Integer.valueOf(AfterSplit[27]));
+//					context.write(new Text(part2+"\t"+FeeColum), new Text("1"));
+//					init();
+//				}
 			}
 		}
 

@@ -33,7 +33,7 @@ public class App {
 		
 		FileInputFormat.setInputPaths(job, 
 				"/home/jhihzonghu/3YearFile.csv");
-		FileOutputFormat.setOutputPath(job, new Path("/home/jhihzonghu/DRGs_Mix/"));
+		FileOutputFormat.setOutputPath(job, new Path("/home/jhihzonghu/DRGs_Class10/"));
 		job.waitForCompletion(true);
 		long ProcessTime = System.currentTimeMillis() - StartTime;
 		AverageTime += ProcessTime;

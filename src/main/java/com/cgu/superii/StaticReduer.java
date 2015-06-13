@@ -7,8 +7,9 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 public class StaticReduer extends Reducer<Text,Text,Text, Text> {
-  String sum  ; 
-  int TotalAccount = 1; 
+  String sum  ;
+  Text sum2 ; 
+  int TotalAccount = 0; 
   String[] CancerCode = {  "P067047B", "P067048B", "P067049B", "P067050B",
 			"P067051B", "P068049B" };
 	@Override
@@ -18,13 +19,12 @@ public class StaticReduer extends Reducer<Text,Text,Text, Text> {
 	//	super.reduce(arg0, arg1, arg2);
 		for(Text AccountEveryRow:EveryRowPrice)
 		{
-			
-			TotalAccount += 1 ; 
-			//sum += ","+AccountEveryRow.toString() ; 
+			TotalAccount += Integer.valueOf(AccountEveryRow.toString());
+					//sum += ","+AccountEveryRow.toString() ; 
 		}
-		//System.out.println("PID: \t"+ PID + "TotalPrice: \t"+sum);
-		context.write(PID, new Text(""+TotalAccount));
-		sum = "" ; 
+		//System.out.println("PID: \t"+ PID + "  TotalPrice: \t"+TotalAccount);
+		context.write(new Text(PID), new Text(""+TotalAccount));
+		sum2 = new Text(""); 
 		TotalAccount = 0 ; 
 	}
 
